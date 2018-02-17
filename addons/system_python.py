@@ -28,7 +28,6 @@ class SystemPythonAddonPreferences(AddonPreferences):
 
     def draw(self, context):
         layout = self.layout
-        # layout.label(text="Location of System Python 'site-packages' folder")
         layout.prop(self, "filepath")
         layout.label(text="Blender Python is {}".format(sys.version))
         layout.label(text="Restart Blender for changes to take effect.")
@@ -45,22 +44,16 @@ def _append_system_python():
             sys.path.append(filepath)
             print("Added to Python path: {}".format(filepath))
 
+
 def register():
     bpy.utils.register_class(SystemPythonAddonPreferences)
     _append_system_python()
-    # print("Added system Python 3.5 libraries to path")
 
 
 def unregister():
     bpy.utils.unregister_class(SystemPythonAddonPreferences)
     print("Sorry, does nothing yet!")
 
-# def register():
-#     _append_system_python()
-#     print("Added system Python 3.5 libraries to path")
-
-# def unregister():
-#     print("Sorry, does nothing yet!")
 
 if __name__ == "__main__":
     register()
