@@ -10,7 +10,7 @@ bl_info = {
     "name": "System Python Libaries",
     "author": "William Minchin",
     "description": "Make libraries installed on system Python available to Blender.",
-    "version": (0, 1, 0),
+    "version": (0, 1, 1),
     "category": "System",
     "location": "User Preferences > Add-ons > User",
 }
@@ -41,7 +41,7 @@ def _append_system_python():
         prefs = addon.preferences
         filepath = prefs.filepath
         if filepath:
-            sys.path.append(filepath)
+            sys.path.insert(0, filepath)
             print("Added to Python path: {}".format(filepath))
 
 

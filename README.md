@@ -1,5 +1,4 @@
-minchin.blender
-===============
+# minchin.blender
 
 Useful addons, scripts and modules for Blender.
 
@@ -8,8 +7,7 @@ Preferences > File > Scripts`.
 
 Included:
 
-Add-ons
--------
+## Add-ons
 
 ### System Python Libraries
 
@@ -21,9 +19,8 @@ Configuration: Under `User Preferences > Add-ons > System`
 
 **Note**: You can also point this at virtual environment.
 
-Scripts
--------
+## Scripts
 
 ### Random Typography
 
-**Descirption**: Generate a mesh of random points.
+**Description**: Generate a mesh of random points.
