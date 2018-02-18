@@ -12,18 +12,18 @@ class Already2DPointError(ValueError):
 def north(base_tuple, delta):
     """Determine a point *north* of the base location."""
     if len(base_tuple) == 2:
-        return (base_tuple[0]+delta, base_tuple[1])
+        return (base_tuple[0]-delta, base_tuple[1])
     elif len(base_tuple) == 3:
-        return (base_tuple[0]+delta, base_tuple[1], base_tuple[2])
+        return (base_tuple[0]-delta, base_tuple[1], base_tuple[2])
     else:
         raise InvalidPointError(base_tuple)
 
 def south(base_tuple, delta):
     """Determine a point *south* of the base location."""
     if len(base_tuple) == 2:
-        return (base_tuple[0]-delta, base_tuple[1])
+        return (base_tuple[0]+delta, base_tuple[1])
     elif len(base_tuple) == 3:
-        return (base_tuple[0]-delta, base_tuple[1], base_tuple[2])
+        return (base_tuple[0]+delta, base_tuple[1], base_tuple[2])
     else:
         raise InvalidPointError(base_tuple)
 
