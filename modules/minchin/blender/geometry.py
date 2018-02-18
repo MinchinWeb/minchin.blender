@@ -6,6 +6,9 @@ class InvalidPointError(ValueError):
 class Already3DPointError(ValueError):
     """Raised when we try to add the third dimension to a 3D point."""
 
+class Already2DPointError(ValueError):
+    """Raised when we try to remove the third dimension to a 3D point."""
+
 def north(base_tuple, delta):
     """Determine a point *north* of the base location."""
     if len(base_tuple) == 2:
@@ -62,5 +65,14 @@ def add_z(base_tuple, z=0):
         return (base_tuple[0], base_tuple[1], z)
     elif len(base_tuple) == 3:
         raise Already3DPointError(base_tuple)
+    else:
+        raise InvalidPointError(base_tuple)
+
+def drop_z(base_tuple):
+    """Drops the z dimension and returns a 2D point."""
+    if len(base_tuple) == 2:
+        raise Already2DPointError(base_tuple)
+    elif len(base_tuple) == 3:
+        return (base_tuple[0], base_tuple[1])
     else:
         raise InvalidPointError(base_tuple)
