@@ -15,13 +15,13 @@ furlong = fur = 10 * ch
 league = 3 * mi  # traditionally, how long someone could walk in a hour
 
 meter = metre = m = 39.370 * inch
-kilometer = kilometre = km = 1_000 * m
-centimeter = centimetre = cm = 1/100 * m
-millimeter = millimetre = mm = 1/1_000 * m
-micrometer = micrometre = um = 1/1_000_000 * m
-nanometer = nanometre = nm = 1/1_000_000_000 * m
+kilometer = kilometre = km = 10**3 * m
+centimeter = centimetre = cm = 1/1**2 * m
+millimeter = millimetre = mm = 1/10**3 * m
+micrometer = micrometre = um = 1/10**6 * m
+nanometer = nanometre = nm = 1/10**9 * m
 
-nautical_mile = nmi = 1_852 * m
+nautical_mile = nmi = 1852 * m
 
 # Points are used in typography
 point = pt = 1/12 * inch
