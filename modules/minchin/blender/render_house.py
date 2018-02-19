@@ -1,13 +1,14 @@
 import bpy
 
-from .geometry import north, south, east, west, add_z
+from .geometry import north, south, east, west, add_z, poly_area2D
+from .measurements import ft
 
 
 class UnknownCommandError(KeyError):
     pass
 
 
-def build_room(room_name, edges):
+def build_room(room_name, edges, floor_height):
     """
     Generate a mesh corresponding to the room's footprint.
 
@@ -19,7 +20,11 @@ def build_room(room_name, edges):
     locations = []
 
     def set_location(_, location):
-        return location
+        # will drop 3rd dimension
+        if len(location) == 2:
+            return location
+        else:
+            return (location[0], location[1])
 
     def pass_function(_, _2):
         return None
@@ -38,7 +43,7 @@ def build_room(room_name, edges):
             new_location = command_options[command](current_location, distance)
             if new_location:
                 current_location = new_location
-                locations.append(add_z(current_location))
+                locations.append(add_z(current_location, z=floor_height))
         else:
             raise UnknownCommandError(command)
     
@@ -53,11 +58,18 @@ def build_room(room_name, edges):
     scene = bpy.context.scene
     scene.objects.link(obj)
 
+    # calculate area
+    locations_2D = [[i[0], i[1]] for i in locations]
+    area = poly_area2D(locations_2D)
+    area = area / (ft**2)
+
     to_return= {
+        "name": room_name,
         "verts": locations,
         "faces": faces,
         "mesh": mesh_data,
         "obj": obj,
+        "area": area,
     }
 
     return to_return

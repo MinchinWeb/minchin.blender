@@ -9,6 +9,7 @@ class Already3DPointError(ValueError):
 class Already2DPointError(ValueError):
     """Raised when we try to remove the third dimension to a 3D point."""
 
+
 def north(base_tuple, delta):
     """Determine a point *north* of the base location."""
     if len(base_tuple) == 2:
@@ -59,6 +60,7 @@ def down(base_tuple, delta):
     else:
         raise InvalidPointError(base_tuple)
 
+
 def add_z(base_tuple, z=0):
     """Add the third dimension to a 2D point."""
     if len(base_tuple) == 2:
@@ -76,3 +78,20 @@ def drop_z(base_tuple):
         return (base_tuple[0], base_tuple[1])
     else:
         raise InvalidPointError(base_tuple)
+
+
+def poly_area2D(poly):
+    """
+    Area of a 2D polynomial.
+    
+    Assumes that it does not self-intersect.
+    """
+    # https://code.activestate.com/recipes/578275-2d-polygon-area/
+    # https://github.com/ActiveState/code/blob/master/recipes/Python/578275_2D_polygon_area/recipe-578275.py
+    total = 0.0
+    N = len(poly)
+    for i in range(N):
+        v1 = poly[i]
+        v2 = poly[(i+1) % N]
+        total += v1[0]*v2[1] - v1[1]*v2[0]
+    return abs(total/2)
