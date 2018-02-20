@@ -95,3 +95,12 @@ def poly_area2D(poly):
         v2 = poly[(i+1) % N]
         total += v1[0]*v2[1] - v1[1]*v2[0]
     return abs(total/2)
+
+
+def add_xy(xy1, xy2):
+    if len(xy1) != 2:
+        raise InvalidPointError(xy1)
+    if len(xy2) != 2:
+        raise InvalidPointError(xy2)
+    
+    return (xy1[0] + xy2[0], xy1[1] + xy2[1])

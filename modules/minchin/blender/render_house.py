@@ -1,11 +1,19 @@
 import bpy
 
-from .geometry import north, south, east, west, add_z, poly_area2D
+from .geometry import north, south, east, west, add_z, poly_area2D, add_xy
 from .measurements import ft
 
 
 class UnknownCommandError(KeyError):
     pass
+
+
+def _set_location(_, location):
+    # will drop 3rd dimension
+    if len(location) == 2:
+        return location
+    else:
+        return (location[0], location[1])
 
 
 def build_room(room_name, edges, floor_height):
@@ -19,18 +27,13 @@ def build_room(room_name, edges, floor_height):
     current_location = None
     locations = []
 
-    def set_location(_, location):
-        # will drop 3rd dimension
-        if len(location) == 2:
-            return location
-        else:
-            return (location[0], location[1])
+
 
     def pass_function(_, _2):
         return None
     
     command_options = {
-        "start": set_location,
+        "start": _set_location,
         "north": north,
         "south": south,
         "east": east,
@@ -75,3 +78,11 @@ def build_room(room_name, edges, floor_height):
     return to_return
 
 
+def build_stairs(name, edges, base_height, count, delta_horizontal, delta_height):
+    stairs = []
+    for i in range(count):
+        start_location = add_xy(_set_location(*edges[0]), [x*i for x in delta_horizontal])
+        new_edges = [("start", start_location)] + [edge for edge in edges[1:]]
+        new_height = base_height + delta_height * i
+        stair = build_room("{} {}".format(name, i+1), new_edges, new_height)
+        stairs.append(stair)
