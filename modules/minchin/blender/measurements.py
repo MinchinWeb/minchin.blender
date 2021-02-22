@@ -16,7 +16,7 @@ league = 3 * mi  # traditionally, how long someone could walk in a hour
 
 meter = metre = m = 39.370 * inch
 kilometer = kilometre = km = 10**3 * m
-centimeter = centimetre = cm = 1/1**2 * m
+centimeter = centimetre = cm = 1/10**2 * m
 millimeter = millimetre = mm = 1/10**3 * m
 micrometer = micrometre = um = 1/10**6 * m
 nanometer = nanometre = nm = 1/10**9 * m
